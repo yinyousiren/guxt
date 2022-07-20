@@ -1,0 +1,85 @@
+server:
+  port: 8080
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      names:
+        master,slave
+      # 主数据源
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://101.34.43.47:3307/guxt_take?characterEncoding=utf-8
+        username: root
+        password: 1234
+        validationQuery: SELECT 1
+        validationQueryTimeout: 1000
+      # 从数据源
+      slave:
+        enenabled: true
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://101.34.43.47:3308/guxt_take?characterEncoding=utf-8
+        username: root
+        password: 1234
+        validationQuery: SELECT 1
+        validationQueryTimeout: 1000
+
+      masterslave:
+        # 读写分离配置
+        load-balance-algorithm-type: round_robin
+        # 最终的数据源名称
+        name: dataSource
+        # 主库数据源名称
+        master-data-source-name: master
+        # 从库数据源名称列表，多个逗号分隔
+        slave-data-source-names: slave
+      props:
+        sql:
+          show: true #开启SQL显示，默认false
+    sharding:
+      default-data-source-name: master
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  cache:
+    redis:
+      time-to-live: 1800000 #设置缓存数据的过期时间
+
+  banner:
+    location: banner.txt
+  application:
+    name:yt_take_out
+
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+
+weixin:
+  getPhoneNumberUrl: https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=
+  getAccessTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
+  jscode2sessionUrl: https://api.weixin.qq.com/sns/jscode2session
+  appid: 要填写
+  secret: 注意填写
+
+qiniu:
+  accessKey: 自己的key
+  secretKey: 自己的key
+  bucket: 创建空间的名字
+
+
+TencentCloud:
+  secretId: 填写
+  secretKey: 填写
+  appID: 填写
+  sign: 填写

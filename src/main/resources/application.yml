@@ -78,8 +78,3 @@ qiniu:
   bucket: 创建空间的名字
 
 
-TencentCloud:
-  secretId: 填写
-  secretKey: 填写
-  appID: 填写
-  sign: 填写

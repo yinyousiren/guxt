@@ -36,32 +36,28 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         Claims claims = JwtUtils.parseJWT(token);
         Long id = Long.valueOf(claims.getId());
 
-        metaObject.setValue("createTime",LocalDateTime.now());
-        metaObject.setValue("updateTime",LocalDateTime.now());
-        metaObject.setValue("createUser",id);
-        metaObject.setValue("updateUser",id);
 
-//        if (metaObject.hasSetter("createTime")) {
-//            metaObject.setValue("createTime", LocalDateTime.now());
-//        }
-//        if (metaObject.hasSetter("updateTime")) {
-//            metaObject.setValue("updateTime", LocalDateTime.now());
-//        }
-//
-//        if (metaObject.hasSetter("createUser")) {
-//            metaObject.setValue("createUser", id);
-//        }
-//        if (metaObject.hasSetter("updateUser")) {
-//            metaObject.setValue("updateUser", id);
-//        }
-//
-//
-//        if (metaObject.hasSetter("createUser")) {
-//            metaObject.setValue("createUser", id);
-//        }
-//        if (metaObject.hasSetter("updateUser")) {
-//            metaObject.setValue("updateUser", id);
-//        }
+        if (metaObject.hasSetter("createTime")) {
+            metaObject.setValue("createTime", LocalDateTime.now());
+        }
+        if (metaObject.hasSetter("updateTime")) {
+            metaObject.setValue("updateTime", LocalDateTime.now());
+        }
+
+        if (metaObject.hasSetter("createUser")) {
+            metaObject.setValue("createUser", id);
+        }
+        if (metaObject.hasSetter("updateUser")) {
+            metaObject.setValue("updateUser", id);
+        }
+
+
+        if (metaObject.hasSetter("createUser")) {
+            metaObject.setValue("createUser", id);
+        }
+        if (metaObject.hasSetter("updateUser")) {
+            metaObject.setValue("updateUser", id);
+        }
 
 
     }
@@ -79,32 +75,30 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         Claims claims = JwtUtils.parseJWT(token);
         Long id = Long.valueOf(claims.getId());
 
-        metaObject.setValue("updateTime",LocalDateTime.now());
-        metaObject.setValue("updateUser",id);
 
-//        if (metaObject.hasSetter("createTime")) {
-//            metaObject.setValue("createTime", LocalDateTime.now());
-//        }
-//
-//        if (metaObject.hasSetter("updateTime")) {
-//            metaObject.setValue("updateTime", LocalDateTime.now());
-//        }
-//
-//        if (metaObject.hasSetter("createUser")) {
-//            metaObject.setValue("createUser", id);
-//        }
-//
-//        if (metaObject.hasSetter("updateUser")) {
-//            metaObject.setValue("updateUser", id);
-//        }
-//
-//
-//        if (metaObject.hasSetter("createUser")) {
-//            metaObject.setValue("createUser", id);
-//        }
-//        if (metaObject.hasSetter("updateUser")) {
-//            metaObject.setValue("updateUser", id);
-//        }
+        if (metaObject.hasSetter("createTime")) {
+            metaObject.setValue("createTime", LocalDateTime.now());
+        }
+
+        if (metaObject.hasSetter("updateTime")) {
+            metaObject.setValue("updateTime", LocalDateTime.now());
+        }
+
+        if (metaObject.hasSetter("createUser")) {
+            metaObject.setValue("createUser", id);
+        }
+
+        if (metaObject.hasSetter("updateUser")) {
+            metaObject.setValue("updateUser", id);
+        }
+
+
+        if (metaObject.hasSetter("createUser")) {
+            metaObject.setValue("createUser", id);
+        }
+        if (metaObject.hasSetter("updateUser")) {
+            metaObject.setValue("updateUser", id);
+        }
 
     }
 }

@@ -9,7 +9,7 @@ import com.guxt.take.entity.User;
 import java.util.Map;
 
 public interface UserService extends IService<User> {
-    R<User> login(Map map);
+
 
     /**
      * 用户退出

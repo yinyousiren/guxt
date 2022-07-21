@@ -41,26 +41,7 @@ public class UserController {
     @Autowired
     private HttpClientUtil httpClientUtil;
 
-    /**
-     * @param user
-     * @return
-     */
-    @PostMapping("/sendMsg")
-    public R<String> sendMsg(@RequestBody User user) {
-        //获取手机号
-        String phone = user.getPhone();
-        if (StringUtils.isNotEmpty(phone)) {
-            //生成随机验证码
-            String code = ValidateCodeUtils.generateValidateCode(6).toString();
-            //调用腾讯云Api完成发送短信
-            log.info("code={}", code);
-            SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE,phone,code);
-            redisUtils.saveValidateCode2Redis(phone, code);
-            return R.success("验证码发送成功");
-        }
-        return R.error("验证码发送失败");
 
-    }
 
     @PostMapping("/wxLogin")
     public R<HashMap<String, String>> wxLogin(@RequestBody User userInfo) throws Exception {
@@ -102,52 +83,8 @@ public class UserController {
 
     }
 
-    @PostMapping("/wxGetPhone")
-    public R<JSONObject> wxGetPhone(@RequestBody User userInfo) {
-        String code = userInfo.getCode();
-        System.out.println("code--" + code);
-        String token_url = environment.getProperty("weixin.getAccessTokenUrl") + "appid=" + environment.getProperty("weixin.appid") + "&secret=" + environment.getProperty("weixin.secret");
-        System.out.println("token_url--" + token_url);
-        String token = httpClientUtil.sendHttpGet(token_url);
-        System.out.println("token--" + token);
-
-        String access_token = JSON.parseObject(token).get("access_token").toString();
-        System.out.println("access_token--" + access_token);
-        String url = environment.getProperty("weixin.getPhoneNumberUrl") + access_token;
-        System.out.println("url--" + url);
-
-        JSONObject params = new JSONObject();
-        params.put("code", code);
-        String result = httpClientUtil.sendHttpPostJson(url, params);
-        JSONObject parse = (JSONObject) JSON.parse(result);
-        System.out.println(parse);
-        Object phone_info = parse.get("phone_info");
-        System.out.println(phone_info);
-        JSONObject phoneInfo = (JSONObject) JSON.parse(String.valueOf(phone_info));
-        String phoneNumber = (String) phoneInfo.get("phoneNumber");
-        System.out.println(phoneNumber);
-        System.out.println("UserId" + UserThreadLocal.get().getId());
-        User byId = userService.getById(UserThreadLocal.get().getId());
-        log.info(byId.getPhone());
-        if(StringUtils.isEmpty(byId.getPhone())){
-            byId.setPhone(phoneNumber);
-            userService.updateById(byId);
-        }
-        //if (!byId.getPhone().equals(phoneNumber)){
-        //    byId.setPhone(phoneNumber);
-        //    userService.updateById(byId);
-        //}
 
 
-
-        return R.success(parse);
-    }
-
-    @PostMapping("/login")
-    public R<User> login(@RequestBody Map map) {
-
-        return userService.login(map);
-    }
 
     @PostMapping("/loginout")
     public R<String> logout() {

@@ -2,6 +2,10 @@ package com.guxt.take.utils;
 
 import com.guxt.take.entity.Employee;
 
+/**
+ * 存储管理员Id
+ */
+
 public class EmpThreadLocal {
     private EmpThreadLocal(){}
 

@@ -27,8 +27,10 @@ import java.util.List;
 //@Component
 @Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
+
     @Autowired
     private EmployeeService employeeService;
+
     @Resource
     private RedisUtils redisUtils;
     @Autowired
@@ -37,8 +39,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 
-
     private List<String> urls = new ArrayList<>();
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
@@ -48,7 +50,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             if (StringUtils.isEmpty(token)) {
                 response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
                 return false;
-                //throw new CustomException("签名验证不存在!");
 
 
             } else {
@@ -56,7 +57,6 @@ public class LoginInterceptor implements HandlerInterceptor {
                 if (claims == null) {
                     response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
                     return false;
-                    //throw new CustomException("鉴权失败!");
 
                 } else {
                     String id = JwtUtils.parseJWT(token).getId();
@@ -79,6 +79,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
     }
+
     public List<String> getUrls(){
 
         urls.add("/employee/login");

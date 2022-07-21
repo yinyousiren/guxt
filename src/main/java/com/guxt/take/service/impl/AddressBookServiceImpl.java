@@ -56,7 +56,5 @@ public class AddressBookServiceImpl extends ServiceImpl<AddressBookMapper, Addre
         addressBook.setIsDefault(1);
         addressBookMapper.updateById(addressBook);
 
-
-
     }
 }

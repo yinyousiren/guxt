@@ -1,7 +1,6 @@
 package com.guxt.take.common;
 
 
-
 public class BaseContext {
     private static ThreadLocal<Long> threadLocal = new ThreadLocal<>();
 

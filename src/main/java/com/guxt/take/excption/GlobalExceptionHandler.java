@@ -15,6 +15,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @ControllerAdvice(annotations = {RestController.class, Controller.class})
 @ResponseBody
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public R<String> exceptionHandler(SQLIntegrityConstraintViolationException e){
         if (e.getMessage().contains("Duplicate entry")){

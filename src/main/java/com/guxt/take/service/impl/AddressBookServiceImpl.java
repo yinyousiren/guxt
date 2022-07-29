@@ -18,10 +18,11 @@ import java.util.List;
 @Service
 @Slf4j
 public class AddressBookServiceImpl extends ServiceImpl<AddressBookMapper, AddressBook> implements AddressBookService {
+
     @Autowired
     private AddressBookMapper addressBookMapper;
-    @Autowired
-    private HttpServletRequest request;
+
+
     @Override
     public R<List<AddressBook>> findAddressByUserId(AddressBook addressBook) {
         addressBook.setUserId(UserThreadLocal.get().getId());

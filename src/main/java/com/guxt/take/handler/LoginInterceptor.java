@@ -85,8 +85,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         urls.add("/employee/login");
         urls.add("/employee/logout");
         urls.add("/backend/**");
-        urls.add("/front/**");
-        urls.add("/user/sendMsg");
+        //urls.add("/front/**");
+        //urls.add("/user/sendMsg");
         urls.add("/user/login");
         urls.add("/user/wxLogin");
 
